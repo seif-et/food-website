@@ -1,3 +1,36 @@
+<?php
+include_once 'DB_connection.php';
+$blog_query = "SELECT * FROM blog";
+$blog_result = mysqli_query($db,$blog_query);
+while($blog = mysqli_fetch_assoc($blog_result)){
+ echo $blog['title'];
+ echo $blog['created_at'];
+ echo $blog['body'];
+echo '<img src="data:image/png;base64,' . base64_encode($blog['image']) . '" />';
+}
+?>
+ <?php
+$menu_query = "SELECT * FROM menu";
+$menu_result = mysqli_query($db,$menu_query);
+while($menu = mysqli_fetch_assoc($menu_result)){
+ echo $menu['name'];
+ echo $menu['description'];
+ echo $menu['price'];
+ echo $menu['category'];
+
+}
+?>
+<form method="POST" action="add_order.php">
+	<input type="text" placeholder="Full Name" name="full_name" required>
+	<input type="text" placeholder="Phone" name="phone_number" required>
+	<input type="text" placeholder="Food Name" name="food_name" required>
+	<input type="text" placeholder="Order Details" name="order_details" >
+	<input type="text" placeholder="Address" name="address" required>
+	<input type="number" placeholder="Qty" name="quantity" required>
+	
+	<input type="submit" name="submit" value="submit">
+    </form>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
