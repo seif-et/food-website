@@ -13,7 +13,80 @@ while($orders = mysqli_fetch_assoc($orders_result)){
    echo $orders['quantity'];
 }
 ?>
-<!-- "<span><a href='delete_order.php?id=".$row['id']."'>Delete</a></span>"  for you reference https://stackoverflow.com/questions/29629161/deleting-a-row-with-php-mysql -->
+
+<?php
+$gallery_query = "SELECT * FROM gallery";
+$gallery_result = mysqli_query($db,$gallery_query);
+while($gallery = mysqli_fetch_assoc($gallery_result)){
+   echo $gallery['id'];
+   echo '<img src="data:image/png;base64,' . base64_encode($gallery['image']) . '" />';
+  
+}
+?>
+<span><a href='delete_order.php?id=".$row['id']."'>Delete order</a></span>
+<!-- for you reference https://stackoverflow.com/questions/29629161/deleting-a-row-with-php-mysql -->
+<form method="POST" action="add_order.php">
+   <input type="text" placeholder="Full Name" name="full_name" required>
+   <input type="text" placeholder="Phone" name="phone_number" required>
+   <input type="text" placeholder="Food Name" name="food_name" required>
+   <input type="text" placeholder="Order Details" name="order_details" >
+   <input type="text" placeholder="Address" name="address" required>
+   <input type="number" placeholder="Qty" name="quantity" required>
+   
+   <input type="submit" name="submit" value="submit">
+</form>
+<form method="POST" action="update_order.php">
+   <input type="text" placeholder="id" name="id" required>
+   <input type="text" placeholder="Full Name" name="full_name" required>
+   <input type="text" placeholder="Phone" name="phone_number" required>
+   <input type="text" placeholder="Food Name" name="food_name" required>
+   <input type="text" placeholder="Order Details" name="order_details" >
+   <input type="text" placeholder="Address" name="address" required>
+   <input type="number" placeholder="Qty" name="quantity" required>
+   
+   <input type="submit" name="submit" value="submit">
+</form>
+
+<span><a href='delete_menu.php?id=".$row['id']."'>Delete menu</a></span>
+<form method="POST" action="add_menu.php">
+   <input type="text" placeholder="Name" name="name" required>
+	<input type="text" placeholder="description" name="description" required>
+	<input type="text" placeholder="category" name="category" required>
+	<input type="number" placeholder="price" name="price" required>
+	<input type="submit" name="submit" value="submit">
+</form>
+<form method="POST" action="update_menu.php">
+   <input type="text" placeholder="id" name="id" required>
+	<input type="text" placeholder="Name" name="name" required>
+	<input type="text" placeholder="description" name="description" required>
+	<input type="text" placeholder="category" name="category" required>
+	<input type="number" placeholder="price" name="price" required>
+	<input type="submit" name="submit" value="submit">
+</form>
+
+
+<span><a href='delete_blog.php?id=".$row['id']."'>Delete blog</a></span>
+<form method="POST" action="add_blog.php">
+	<input type="text" placeholder="title" name="title" required>
+	<input type="text" placeholder="body" name="body" required>
+	<input type="text" placeholder="author" name="author" required>
+	<input type="file"  name="image" required>
+   <input type="time" placeholder="created_at" name="created_at" required>
+	<input type="submit" name="submit" value="submit">
+</form>
+
+<form method="POST" action="update_blog.php">
+   <input type="text" placeholder="id" name="id" required>
+	<input type="text" placeholder="title" name="title" required>
+	<input type="text" placeholder="body" name="body" required>
+	<input type="text" placeholder="author" name="author" required>
+	<input type="file"  name="image" required>
+   <input type="time" placeholder="created_at" name="created_at" required>
+	<input type="submit" name="submit" value="submit">
+</form>
+
+
+<!-- ********************** START FILE ************************************* -->
 
 <!DOCTYPE html>
 <html lang="en">
