@@ -15,6 +15,8 @@
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
 
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
 
@@ -158,7 +160,22 @@
    <div class="heading">
       <span>our gallery</span>
       <h3>our untold stories</h3>
-      <a href="#" class="btn">add images</a>
+      <a
+         onclick="document.getElementById('addImgModal').style.display='block'"
+         class="w3-button"
+      >Add Image</a>
+      <div id="addImgModal" class="w3-modal">
+         <div class="w3-modal-content">
+            <div class="w3-container">
+               <span onclick="document.getElementById('addImgModal').style.display='none'"
+               class="w3-button w3-display-topright">&times;</span>
+               <form method="POST" action="add_gallery.php">
+                  <input type="file"  name="image" required>
+                  <input type="submit" name="submit" value="submit">
+               </form>
+            </div>
+         </div>
+      </div>
    </div>
 
    <div class="gallery-container">
@@ -207,6 +224,35 @@
          </div>
    </div>
 
+   <div class="heading">
+      <span>add menu item</span>
+   </div>
+
+   <div class="order">
+      <form method="POST" action="./add_menu.php">
+         <div class="box-container">
+            <div class="box">
+               <div class="inputBox">
+                  <span>Item name</span>
+                  <input type="text" placeholder="Name" name="name" required />
+               </div>
+               <div class="inputBox">
+                  <span>Description</span>
+                  <input type="text" placeholder="description" name="description" required />
+               </div>
+               <div class="inputBox">
+                  <span>Category</span>
+                  <input type="text" placeholder="category" name="category" required />
+               </div>
+               <div class="inputBox">
+                  <span>Price</span>
+                  <input type="number" placeholder="price" name="price" required />
+               </div>
+               <input type="submit" name="submit" value="Add" class="btn"/>
+            </div>
+         </div>
+      </form>
+   </div>
 </section>
 
 <!-- menu section ends -->
@@ -265,6 +311,25 @@
    <div class="heading">
       <span>our blogs</span>
       <h3>our latest posts</h3>
+   </div>
+
+   <a onclick="document.getElementById('newBlogModal').style.display='block'"
+    class="btn w3-button" style="background-color: grey;">New Blog</a>
+
+   <div id="newBlogModal" class="w3-modal">
+      <div class="w3-modal-content">
+         <div class="w3-container">
+            <span onclick="document.getElementById('newBlogModal').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+            <form method="POST" action="./add_blog.php">
+               <input type="text" placeholder="title" name="title" required>
+               <textarea name="body" placeholder="body" id="" cols="30" rows="5" required></textarea>
+               <input type="text" placeholder="author" name="author" required>
+               <input type="file"  name="image" required>
+               <input type="submit" name="submit" value="submit">
+            </form>
+         </div>
+      </div>
    </div>
 
    <div class="swiper blogs-slider">
