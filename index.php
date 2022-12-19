@@ -162,34 +162,40 @@
       <h3>our untold stories</h3>
       <a
          onclick="document.getElementById('addImgModal').style.display='block'"
-         class="w3-button"
+         class="w3-button btn"
       >Add Image</a>
       <div id="addImgModal" class="w3-modal">
          <div class="w3-modal-content">
             <div class="w3-container">
                <span onclick="document.getElementById('addImgModal').style.display='none'"
                class="w3-button w3-display-topright">&times;</span>
-               <form method="POST" action="add_gallery.php">
-                  <input type="file"  name="image" required>
-                  <input type="submit" name="submit" value="submit">
-               </form>
+               <div class="order">
+                  <form method="POST" action="add_gallery.php" enctype="multipart/form-data">
+                     <div class="box-container">
+                        <div class="box">
+                           <div class="inputBox">
+                              <span>Image</span>
+                              <input type="file" name="image" required>
+                           </div>
+                           <input type="submit" name="submit" value="Add" class="btn">
+                        </div>
+                  </form>
+               </div>
             </div>
          </div>
       </div>
    </div>
 
    <div class="gallery-container">
-
       <?php
          $gallery_query = "SELECT * FROM gallery";
          $gallery_result = mysqli_query($db,$gallery_query);
          while($gallery = mysqli_fetch_assoc($gallery_result)){
+            echo '<a href="data:image/png;base64,' . base64_encode($gallery['image']) . '" class="box">'; 
+            echo '<img src="data:image/png;base64,' . base64_encode($gallery['image']) . '" />' ;
+            echo '<div class="icon"> <i class="fas fa-plus"></i> </div></a>';
+         } 
       ?>
-         <?php echo '<a href="data:image/png;base64,' . base64_encode($gallery['image']) . '" class="box">' ?>
-            <?php echo '<img src="data:image/png;base64,' . base64_encode($gallery['image']) . '" />' ?>
-            <div class="icon"> <i class="fas fa-plus"></i> </div>
-         </a>
-      <?php } ?>
 
    </div>
 
@@ -321,13 +327,31 @@
          <div class="w3-container">
             <span onclick="document.getElementById('newBlogModal').style.display='none'"
             class="w3-button w3-display-topright">&times;</span>
-            <form method="POST" action="./add_blog.php">
-               <input type="text" placeholder="title" name="title" required>
-               <textarea name="body" placeholder="body" id="" cols="30" rows="5" required></textarea>
-               <input type="text" placeholder="author" name="author" required>
-               <input type="file"  name="image" required>
-               <input type="submit" name="submit" value="submit">
-            </form>
+            <div class="order">
+               <form method="POST" action="./add_blog.php" enctype="multipart/form-data">
+                  <div class="box-container">
+                     <div class="box">
+                        <div class="inputBox">
+                           <span>Title</span>
+                           <input type="text" placeholder="title" name="title" required>
+                        </div>
+                        <div class="inputBox">
+                           <span>Body</span>
+                           <textarea name="body" placeholder="body" id="" cols="30" rows="5" required></textarea>
+                        </div>
+                        <div class="inputBox">
+                           <span>Author</span>
+                           <input type="text" placeholder="author" name="author" required>
+                        </div>
+                        <div class="inputBox">
+                           <span>Image</span>
+                           <input type="file"  name="image" required>
+                        </div>
+                        <input type="submit" name="submit" value="Post" class="btn">
+                     </div>
+                  </div>
+               </form>
+            </div>
          </div>
       </div>
    </div>
@@ -353,13 +377,53 @@
                      <a href="#"><i class="fas fa-user"></i>
                         by <?php echo $blog['author'] ?>
                      </a>
+                     <a onclick="document.getElementById('updateBlogModal').style.display='block'">
+                        <i class="fas fa-pen"></i>
+                     </a>
+                     <a href='delete_blog.php?id=<?php echo $blog['id'] ?>'>
+                        <i class="fas fa-trash"></i>
+                     </a>
                   </div>
-                  <a href="#" class="title">
-                     <?php echo $blog['title'] ?>
+               </div>
+            <a href="#" class="title">
+            <?php echo $blog['title'] ?>
                   </a>
                   <p><?php echo $blog['body'] ?></p>
                </div>
             </div>
+            <div id="updateBlogModal" class="w3-modal">
+               <div class="w3-modal-content">
+                  <div class="w3-container">
+                     <span onclick="document.getElementById('updateBlogModal').style.display='none'"
+                     class="w3-button w3-display-topright">&times;</span>
+                              <div class="order">
+                                 <form method="POST" action="./update_blog.php">
+                                    <div class="box-container">
+                                       <div class="box">
+                                          <div class="inputBox">
+                                             <span>Blog ID</span>
+                                             <input type="number" placeholder="id" name="id" value="<?php echo $blog['id'] ?>" readonly required>
+                                          </div>
+                                          <div class="inputBox">
+                                             <span>Title</span>
+                                             <input type="text" placeholder="title" name="title" value="<?php echo $blog['title'] ?>" required>
+                                          </div>
+                                          <div class="inputBox">
+                                             <span>Body</span>
+                                             <textarea name="body" placeholder="body" id="" value="<?php echo $blog['body'] ?>" cols="30" rows="5" required></textarea>
+                                          </div>
+                                          <div class="inputBox">
+                                             <span>Author</span>
+                                             <input type="text" placeholder="author" name="author" value="<?php echo $blog['author'] ?>" required>
+                                          </div>
+                                          <input type="submit" name="submit" value="Update" class="btn">
+                                       </div>
+                                    </div>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
          <?php } ?>
 
       </div>
@@ -422,12 +486,6 @@
 </section>
 
 <!-- footer section ends  -->
-
-
-
-
-
-
 
 
 
