@@ -6,10 +6,10 @@ if(isset($_GET['id'])){
     $result = mysqli_query($db,$sql);
     if($result){
        echo "Delete";
-       header("refresh:2; index.php");
+       header("refresh:2; orders.php");
     }else{
        echo "wrong";
-       header("refresh:2; index.php");
+       header("refresh:2; orders.php");
     }
     }
 ?>

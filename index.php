@@ -1,100 +1,12 @@
 <?php include_once 'DB_connection.php'; ?>
 
-<?php
-$orders_query = "SELECT * FROM orders";
-$orders_result = mysqli_query($db,$orders_query);
-while($orders = mysqli_fetch_assoc($orders_result)){
-   echo $orders['id'];
-   echo $orders['full_name'];
-   echo $orders['food_name'];
-   echo $orders['order_details'];
-   echo $orders['address'];
-   echo $orders['phone_number'];
-   echo $orders['quantity'];
-}
-?>
-
-<?php
-$gallery_query = "SELECT * FROM gallery";
-$gallery_result = mysqli_query($db,$gallery_query);
-while($gallery = mysqli_fetch_assoc($gallery_result)){
-   echo $gallery['id'];
-   echo '<img src="data:image/png;base64,' . base64_encode($gallery['image']) . '" />';
-  
-}
-?>
-<span><a href='delete_order.php?id=".$row['id']."'>Delete order</a></span>
-<!-- for you reference https://stackoverflow.com/questions/29629161/deleting-a-row-with-php-mysql -->
-<form method="POST" action="add_order.php">
-   <input type="text" placeholder="Full Name" name="full_name" required>
-   <input type="text" placeholder="Phone" name="phone_number" required>
-   <input type="text" placeholder="Food Name" name="food_name" required>
-   <input type="text" placeholder="Order Details" name="order_details" >
-   <input type="text" placeholder="Address" name="address" required>
-   <input type="number" placeholder="Qty" name="quantity" required>
-   
-   <input type="submit" name="submit" value="submit">
-</form>
-<form method="POST" action="update_order.php">
-   <input type="text" placeholder="id" name="id" required>
-   <input type="text" placeholder="Full Name" name="full_name" required>
-   <input type="text" placeholder="Phone" name="phone_number" required>
-   <input type="text" placeholder="Food Name" name="food_name" required>
-   <input type="text" placeholder="Order Details" name="order_details" >
-   <input type="text" placeholder="Address" name="address" required>
-   <input type="number" placeholder="Qty" name="quantity" required>
-   
-   <input type="submit" name="submit" value="submit">
-</form>
-
-<span><a href='delete_menu.php?id=".$row['id']."'>Delete menu</a></span>
-<form method="POST" action="add_menu.php">
-   <input type="text" placeholder="Name" name="name" required>
-	<input type="text" placeholder="description" name="description" required>
-	<input type="text" placeholder="category" name="category" required>
-	<input type="number" placeholder="price" name="price" required>
-	<input type="submit" name="submit" value="submit">
-</form>
-<form method="POST" action="update_menu.php">
-   <input type="text" placeholder="id" name="id" required>
-	<input type="text" placeholder="Name" name="name" required>
-	<input type="text" placeholder="description" name="description" required>
-	<input type="text" placeholder="category" name="category" required>
-	<input type="number" placeholder="price" name="price" required>
-	<input type="submit" name="submit" value="submit">
-</form>
-
-
-<span><a href='delete_blog.php?id=".$row['id']."'>Delete blog</a></span>
-<form method="POST" action="add_blog.php">
-	<input type="text" placeholder="title" name="title" required>
-	<input type="text" placeholder="body" name="body" required>
-	<input type="text" placeholder="author" name="author" required>
-	<input type="file"  name="image" required>
-   <input type="time" placeholder="created_at" name="created_at" required>
-	<input type="submit" name="submit" value="submit">
-</form>
-
-<form method="POST" action="update_blog.php">
-   <input type="text" placeholder="id" name="id" required>
-	<input type="text" placeholder="title" name="title" required>
-	<input type="text" placeholder="body" name="body" required>
-	<input type="text" placeholder="author" name="author" required>
-	<input type="file"  name="image" required>
-   <input type="time" placeholder="created_at" name="created_at" required>
-	<input type="submit" name="submit" value="submit">
-</form>
-
-
-<!-- ********************** START FILE ************************************* -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Complete Responsive Food / Restaurant Website Design Tutorial</title>
+   <title>Food Website</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -102,6 +14,8 @@ while($gallery = mysqli_fetch_assoc($gallery_result)){
    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
@@ -143,7 +57,6 @@ while($gallery = mysqli_fetch_assoc($gallery_result)){
             <div class="content">
                <span>outstanding food</span>
                <h3>delicious cooking</h3>
-               <a href="#" class="btn">get started</a>
             </div>
          </div>
 
@@ -151,7 +64,6 @@ while($gallery = mysqli_fetch_assoc($gallery_result)){
             <div class="content">
                <span>outstanding food</span>
                <h3>morning moment</h3>
-               <a href="#" class="btn">get started</a>
             </div>
          </div>
 
@@ -159,7 +71,6 @@ while($gallery = mysqli_fetch_assoc($gallery_result)){
             <div class="content">
                <span>outstanding food</span>
                <h3>authentic kitchen</h3>
-               <a href="#" class="btn">get started</a>
             </div>
          </div>
 
@@ -185,7 +96,6 @@ while($gallery = mysqli_fetch_assoc($gallery_result)){
    <div class="content">
       <h3 class="title">welcome to our restaurant</h3>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi optio at, saepe accusamus dolorum, quos eos nesciunt amet exercitationem illum quis nostrum, repellat quaerat eum debitis fugit alias magnam omnis!</p>
-      <a href="#" class="btn">read more</a>
       <div class="icons-container">
          <div class="icons">
             <img src="images/about-icon-1.png" alt="">
@@ -243,91 +153,6 @@ while($gallery = mysqli_fetch_assoc($gallery_result)){
 
 <!-- food section ends -->
 
-<!-- food preview section starts  -->
-
-<section class="food-preview-container">
-
-   <div id="close-preview" class="fas fa-times"></div>
-
-   <div class="food-preview" data-target="food-1">
-      <img src="images/food-img-1.png" alt="">
-      <h3>delicious food</h3>
-      <div class="stars">
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-      </div>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, hic!</p>
-      <div class="price">$49.99</div>
-      <a href="#" class="btn">buy now</a>
-   </div>
-
-   <div class="food-preview" data-target="food-2">
-      <img src="images/food-img-2.png" alt="">
-      <h3>delicious food</h3>
-      <div class="stars">
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-      </div>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, hic!</p>
-      <div class="price">$49.99</div>
-      <a href="#" class="btn">buy now</a>
-   </div>
-
-   <div class="food-preview" data-target="food-3">
-      <img src="images/food-img-3.png" alt="">
-      <h3>delicious food</h3>
-      <div class="stars">
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-      </div>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, hic!</p>
-      <div class="price">$49.99</div>
-      <a href="#" class="btn">buy now</a>
-   </div>
-
-   <div class="food-preview" data-target="food-4">
-      <img src="images/food-img-4.png" alt="">
-      <h3>delicious food</h3>
-      <div class="stars">
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-      </div>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, hic!</p>
-      <div class="price">$49.99</div>
-      <a href="#" class="btn">buy now</a>
-   </div>
-
-   <div class="food-preview" data-target="food-5">
-      <img src="images/food-img-5.png" alt="">
-      <h3>delicious food</h3>
-      <div class="stars">
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-         <i class="fas fa-star"></i>
-      </div>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, hic!</p>
-      <div class="price">$49.99</div>
-      <a href="#" class="btn">buy now</a>
-   </div>
-
-</section>
-
-<!-- food preview section ends -->
-
 <!-- gallery section starts  -->
 
 <section class="gallery" id="gallery">
@@ -335,39 +160,42 @@ while($gallery = mysqli_fetch_assoc($gallery_result)){
    <div class="heading">
       <span>our gallery</span>
       <h3>our untold stories</h3>
+      <a
+         onclick="document.getElementById('addImgModal').style.display='block'"
+         class="w3-button btn"
+      >Add Image</a>
+      <div id="addImgModal" class="w3-modal">
+         <div class="w3-modal-content">
+            <div class="w3-container">
+               <span onclick="document.getElementById('addImgModal').style.display='none'"
+               class="w3-button w3-display-topright">&times;</span>
+               <div class="order">
+                  <form method="POST" action="add_gallery.php" enctype="multipart/form-data">
+                     <div class="box-container">
+                        <div class="box">
+                           <div class="inputBox">
+                              <span>Image</span>
+                              <input type="file" name="image" required>
+                           </div>
+                           <input type="submit" name="submit" value="Add" class="btn">
+                        </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
    </div>
 
    <div class="gallery-container">
-
-      <a href="images/food-galler-img-1.jpg" class="box">
-         <img src="images/food-galler-img-1.jpg" alt="">
-         <div class="icon"> <i class="fas fa-plus"></i> </div>
-      </a>
-
-      <a href="images/food-galler-img-2.jpg" class="box">
-         <img src="images/food-galler-img-2.jpg" alt="">
-         <div class="icon"> <i class="fas fa-plus"></i> </div>
-      </a>
-
-      <a href="images/food-galler-img-3.jpg" class="box">
-         <img src="images/food-galler-img-3.jpg" alt="">
-         <div class="icon"> <i class="fas fa-plus"></i> </div>
-      </a>
-
-      <a href="images/food-galler-img-4.jpg" class="box">
-         <img src="images/food-galler-img-4.jpg" alt="">
-         <div class="icon"> <i class="fas fa-plus"></i> </div>
-      </a>
-      
-      <a href="images/food-galler-img-5.jpg" class="box">
-         <img src="images/food-galler-img-5.jpg" alt="">
-         <div class="icon"> <i class="fas fa-plus"></i> </div>
-      </a>
-
-      <a href="images/food-galler-img-6.jpg" class="box">
-         <img src="images/food-galler-img-6.jpg" alt="">
-         <div class="icon"> <i class="fas fa-plus"></i> </div>
-      </a>
+      <?php
+         $gallery_query = "SELECT * FROM gallery";
+         $gallery_result = mysqli_query($db,$gallery_query);
+         while($gallery = mysqli_fetch_assoc($gallery_result)){
+            echo '<a href="data:image/png;base64,' . base64_encode($gallery['image']) . '" class="box">'; 
+            echo '<img src="data:image/png;base64,' . base64_encode($gallery['image']) . '" />' ;
+            echo '<div class="icon"> <i class="fas fa-plus"></i> </div></a>';
+         } 
+      ?>
 
    </div>
 
@@ -402,6 +230,35 @@ while($gallery = mysqli_fetch_assoc($gallery_result)){
          </div>
    </div>
 
+   <div class="heading">
+      <span>add menu item</span>
+   </div>
+
+   <div class="order">
+      <form method="POST" action="./add_menu.php">
+         <div class="box-container">
+            <div class="box">
+               <div class="inputBox">
+                  <span>Item name</span>
+                  <input type="text" placeholder="Name" name="name" required />
+               </div>
+               <div class="inputBox">
+                  <span>Description</span>
+                  <input type="text" placeholder="description" name="description" required />
+               </div>
+               <div class="inputBox">
+                  <span>Category</span>
+                  <input type="text" placeholder="category" name="category" required />
+               </div>
+               <div class="inputBox">
+                  <span>Price</span>
+                  <input type="number" placeholder="price" name="price" required />
+               </div>
+               <input type="submit" name="submit" value="Add" class="btn"/>
+            </div>
+         </div>
+      </form>
+   </div>
 </section>
 
 <!-- menu section ends -->
@@ -411,6 +268,7 @@ while($gallery = mysqli_fetch_assoc($gallery_result)){
 <section class="order" id="order">
 
    <div class="heading">
+      <a href="orders.php" class="btn" style="background-color: grey;">View Orders</a>
       <span>order now</span>
       <h3>fast home delivery</h3>
    </div>
@@ -461,6 +319,43 @@ while($gallery = mysqli_fetch_assoc($gallery_result)){
       <h3>our latest posts</h3>
    </div>
 
+   <a onclick="document.getElementById('newBlogModal').style.display='block'"
+    class="btn w3-button" style="background-color: grey;">New Blog</a>
+
+   <div id="newBlogModal" class="w3-modal">
+      <div class="w3-modal-content">
+         <div class="w3-container">
+            <span onclick="document.getElementById('newBlogModal').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+            <div class="order">
+               <form method="POST" action="./add_blog.php" enctype="multipart/form-data">
+                  <div class="box-container">
+                     <div class="box">
+                        <div class="inputBox">
+                           <span>Title</span>
+                           <input type="text" placeholder="title" name="title" required>
+                        </div>
+                        <div class="inputBox">
+                           <span>Body</span>
+                           <textarea name="body" placeholder="body" id="" cols="30" rows="5" required></textarea>
+                        </div>
+                        <div class="inputBox">
+                           <span>Author</span>
+                           <input type="text" placeholder="author" name="author" required>
+                        </div>
+                        <div class="inputBox">
+                           <span>Image</span>
+                           <input type="file"  name="image" required>
+                        </div>
+                        <input type="submit" name="submit" value="Post" class="btn">
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+
    <div class="swiper blogs-slider">
 
       <div class="swiper-wrapper">
@@ -482,13 +377,53 @@ while($gallery = mysqli_fetch_assoc($gallery_result)){
                      <a href="#"><i class="fas fa-user"></i>
                         by <?php echo $blog['author'] ?>
                      </a>
+                     <a onclick="document.getElementById('updateBlogModal').style.display='block'">
+                        <i class="fas fa-pen"></i>
+                     </a>
+                     <a href='delete_blog.php?id=<?php echo $blog['id'] ?>'>
+                        <i class="fas fa-trash"></i>
+                     </a>
                   </div>
-                  <a href="#" class="title">
-                     <?php echo $blog['title'] ?>
+               </div>
+            <a href="#" class="title">
+            <?php echo $blog['title'] ?>
                   </a>
                   <p><?php echo $blog['body'] ?></p>
                </div>
             </div>
+            <div id="updateBlogModal" class="w3-modal">
+               <div class="w3-modal-content">
+                  <div class="w3-container">
+                     <span onclick="document.getElementById('updateBlogModal').style.display='none'"
+                     class="w3-button w3-display-topright">&times;</span>
+                              <div class="order">
+                                 <form method="POST" action="./update_blog.php">
+                                    <div class="box-container">
+                                       <div class="box">
+                                          <div class="inputBox">
+                                             <span>Blog ID</span>
+                                             <input type="number" placeholder="id" name="id" value="<?php echo $blog['id'] ?>" readonly required>
+                                          </div>
+                                          <div class="inputBox">
+                                             <span>Title</span>
+                                             <input type="text" placeholder="title" name="title" value="<?php echo $blog['title'] ?>" required>
+                                          </div>
+                                          <div class="inputBox">
+                                             <span>Body</span>
+                                             <textarea name="body" placeholder="body" id="" value="<?php echo $blog['body'] ?>" cols="30" rows="5" required></textarea>
+                                          </div>
+                                          <div class="inputBox">
+                                             <span>Author</span>
+                                             <input type="text" placeholder="author" name="author" value="<?php echo $blog['author'] ?>" required>
+                                          </div>
+                                          <input type="submit" name="submit" value="Update" class="btn">
+                                       </div>
+                                    </div>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
          <?php } ?>
 
       </div>
@@ -551,12 +486,6 @@ while($gallery = mysqli_fetch_assoc($gallery_result)){
 </section>
 
 <!-- footer section ends  -->
-
-
-
-
-
-
 
 
 
