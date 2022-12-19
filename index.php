@@ -1,24 +1,5 @@
-<?php
-include_once 'DB_connection.php';
-$blog_query = "SELECT * FROM blog";
-$blog_result = mysqli_query($db,$blog_query);
-while($blog = mysqli_fetch_assoc($blog_result)){
-   echo $blog['title'];
-   echo $blog['created_at'];
-   echo $blog['body'];
-   echo '<img src="data:image/png;base64,' . base64_encode($blog['image']) . '" />';
-}
-?>
- <?php
-$menu_query = "SELECT * FROM menu";
-$menu_result = mysqli_query($db,$menu_query);
-while($menu = mysqli_fetch_assoc($menu_result)){
-   echo $menu['name'];
-   echo $menu['description'];
-   echo $menu['price'];
-   echo $menu['category'];
-}
-?>
+<?php include_once 'DB_connection.php'; ?>
+
 <?php
 $orders_query = "SELECT * FROM orders";
 $orders_result = mysqli_query($db,$orders_query);
@@ -33,18 +14,6 @@ while($orders = mysqli_fetch_assoc($orders_result)){
 }
 ?>
 <!-- "<span><a href='delete_order.php?id=".$row['id']."'>Delete</a></span>"  for you reference https://stackoverflow.com/questions/29629161/deleting-a-row-with-php-mysql -->
-
-<form method="POST" action="update_order.php or add_order.php">
-	<input type="text" placeholder="id" name="id" required>
-	<input type="text" placeholder="Full Name" name="full_name" required>
-	<input type="text" placeholder="Phone" name="phone_number" required>
-	<input type="text" placeholder="Food Name" name="food_name" required>
-	<input type="text" placeholder="Order Details" name="order_details" >
-	<input type="text" placeholder="Address" name="address" required>
-	<input type="number" placeholder="Qty" name="quantity" required>
-	
-	<input type="submit" name="submit" value="submit">
-</form>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -176,37 +145,21 @@ while($orders = mysqli_fetch_assoc($orders_result)){
    <div class="swiper food-slider">
 
       <div class="swiper-wrapper">
-
+         <?php
+            $menu_query = "SELECT * FROM menu";
+            $menu_result = mysqli_query($db,$menu_query);
+            while($menu = mysqli_fetch_assoc($menu_result)){
+         ?>
          <div class="swiper-slide slide" data-name="food-1">
-            <img src="images/food-img-1.png" alt="">
-            <h3>delicious food</h3>
-            <div class="price">$49.99</div>
+            <img src="images/food-img-<?php echo $menu['id'] ?>.png" alt="">
+            <h3>
+               <?php echo $menu['name'] ?>
+            </h3>
+            <div class="price">
+               <?php echo $menu['price'] ?>
+            </div>
          </div>
-
-         <div class="swiper-slide slide" data-name="food-2">
-            <img src="images/food-img-2.png" alt="">
-            <h3>delicious food</h3>
-            <div class="price">$49.99</div>
-         </div>
-
-         <div class="swiper-slide slide" data-name="food-3">
-            <img src="images/food-img-3.png" alt="">
-            <h3>delicious food</h3>
-            <div class="price">$49.99</div>
-         </div>
-
-         <div class="swiper-slide slide" data-name="food-4">
-            <img src="images/food-img-4.png" alt="">
-            <h3>delicious food</h3>
-            <div class="price">$49.99</div>
-         </div>
-
-         <div class="swiper-slide slide" data-name="food-5">
-            <img src="images/food-img-5.png" alt="">
-            <h3>delicious food</h3>
-            <div class="price">$49.99</div>
-         </div>
-
+         <?php }?>
       </div>
 
       <div class="swiper-pagination"></div>
@@ -354,223 +307,26 @@ while($orders = mysqli_fetch_assoc($orders_result)){
 <section class="menu" id="menu">
 
    <div class="heading">
-      <span>our menu</span>
-      <h3>our popular dishes</h3>
+      <h3>our menu</h3>
    </div>
 
    <div class="swiper menu-slider">
-
-      <div class="swiper-wrapper">
-
          <div class="swiper-slide slide">
-            <h3 class="title">breakfast</h3>
             <div class="box-container">
-               <div class="box">
-                  <div class="info">
-                     <h3>morning breakfast</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
+               <?php
+                  $menu_query = "SELECT * FROM menu";
+                  $menu_result = mysqli_query($db,$menu_query);
+                  while($menu = mysqli_fetch_assoc($menu_result)){
+               ?>
+                  <div class="box">
+                     <div class="info">
+                        <h3><?php echo $menu['name'] ?></h3>
+                        <p><?php echo $menu['description'] ?></p>
+                     </div>
+                     <div class="price">$<?php echo $menu['price'] ?></div>
                   </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>morning breakfast</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>morning breakfast</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>morning breakfast</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>morning breakfast</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>morning breakfast</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-            </div>
+               <?php } ?>
          </div>
-
-         <div class="swiper-slide slide">
-            <h3 class="title">lunch</h3>
-            <div class="box-container">
-               <div class="box">
-                  <div class="info">
-                     <h3>delicious lunch</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>delicious lunch</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>delicious lunch</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>delicious lunch</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-            </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <h3 class="title">dinner</h3>
-            <div class="box-container">
-               <div class="box">
-                  <div class="info">
-                     <h3>delicious dinner</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>delicious dinner</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>delicious dinner</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>delicious dinner</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>delicious dinner</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-            </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <h3 class="title">drinks</h3>
-            <div class="box-container">
-               <div class="box">
-                  <div class="info">
-                     <h3>cold drinks</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>cold drinks</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>cold drinks</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>cold drinks</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>cold drinks</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>cold drinks</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-            </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <h3 class="title">dessert</h3>
-            <div class="box-container">
-               <div class="box">
-                  <div class="info">
-                     <h3>sweet dessets</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>sweet dessets</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>sweet dessets</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-               <div class="box">
-                  <div class="info">
-                     <h3>sweet dessets</h3>
-                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex, dolores.</p>
-                  </div>
-                  <div class="price">$49.99</div>
-               </div>
-            </div>
-         </div>
-
-      </div>
-
-      <div class="swiper-pagination"></div>
-
    </div>
 
 </section>
@@ -585,47 +341,38 @@ while($orders = mysqli_fetch_assoc($orders_result)){
       <span>order now</span>
       <h3>fast home delivery</h3>
    </div>
-
-   <form action="">
+   <form method="POST" action="./add_order.php">
       <div class="box-container">
          <div class="box">
             <div class="inputBox">
                <span>full name</span>
-               <input type="text" placeholder="enter your name">
+               <input type="text" placeholder="enter your name" name="full_name" required>
             </div>
             <div class="inputBox">
                <span>food name</span>
-               <input type="text" placeholder="food you want">
-            </div>
-            <div class="inputBox">
-               <span>order details</span>
-               <input type="text" placeholder="specifics with food">
+               <input type="text" placeholder="food you want" name="food_name" required>
             </div>
             <div class="inputBox">
                <span>your address</span>
-               <textarea name="" placeholder="enter your address" id="" cols="30" rows="10"></textarea>
+               <textarea name="address" placeholder="enter your address" id="" cols="30" rows="5"></textarea>
             </div>
          </div>
          <div class="box">
             <div class="inputBox">
                <span>number</span>
-               <input type="number" placeholder="enter your number">
+               <input type="number" placeholder="enter your number" name="phone_number" required>
             </div>
             <div class="inputBox">
                <span>how much</span>
-               <input type="number" placeholder="how many you want">
+               <input type="number" placeholder="how many you want" name="quantity" required>
             </div>
             <div class="inputBox">
-               <span>when you want</span>
-               <input type="datetime-local">
+               <span>order details</span>
+               <input type="text" placeholder="specifics with food" name="order_details" >
             </div>
-            <div class="inputBox">
-               <span>our address</span>
-               <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d60307.59083109428!2d72.840725!3d19.141651!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63aceef0c69%3A0x2aa80cf2287dfa3b!2sJogeshwari%20West%2C%20Mumbai%2C%20Maharashtra%20400047!5e0!3m2!1sen!2sin!4v1642222128240!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
-            </div>
+            <input type="submit" name="submit" value="order now" class="btn">
          </div>
       </div>
-      <input type="submit" value="order now" class="btn">
    </form>
    
 </section>
@@ -645,101 +392,31 @@ while($orders = mysqli_fetch_assoc($orders_result)){
 
       <div class="swiper-wrapper">
 
-         <div class="swiper-slide slide">
-            <div class="image">
-               <img src="images/blog-img-1.jpg" alt="">
-               <span>burger</span>
-            </div>
-            <div class="content">
-               <div class="icon">
-                  <a href="#"> <i class="fas fa-calendar"></i> 21st may, 2022 </a>
-                  <a href="#"> <i class="fas fa-user"></i> by admin </a>
+         <?php
+            $blog_query = "SELECT * FROM blog";
+            $blog_result = mysqli_query($db,$blog_query);
+            while($blog = mysqli_fetch_assoc($blog_result)){
+         ?>
+            <div class="swiper-slide slide">
+               <div class="image">
+                  <?php echo '<img src="data:image/png;base64,' . base64_encode($blog['image']) . '" />' ?>
                </div>
-               <a href="#" class="title">blog title goes here</a>
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, reprehenderit!</p>
-               <a href="#" class="btn">read more</a>
-            </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <div class="image">
-               <img src="images/blog-img-2.jpg" alt="">
-               <span>sandwich</span>
-            </div>
-            <div class="content">
-               <div class="icon">
-                  <a href="#"> <i class="fas fa-calendar"></i> 21st may, 2022 </a>
-                  <a href="#"> <i class="fas fa-user"></i> by admin </a>
+               <div class="content">
+                  <div class="icon">
+                     <a href="#"> <i class="fas fa-calendar"></i>
+                        <?php echo $blog['created_at'] ?>
+                     </a>
+                     <a href="#"><i class="fas fa-user"></i>
+                        by <?php echo $blog['author'] ?>
+                     </a>
+                  </div>
+                  <a href="#" class="title">
+                     <?php echo $blog['title'] ?>
+                  </a>
+                  <p><?php echo $blog['body'] ?></p>
                </div>
-               <a href="#" class="title">blog title goes here</a>
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, reprehenderit!</p>
-               <a href="#" class="btn">read more</a>
             </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <div class="image">
-               <img src="images/blog-img-3.jpg" alt="">
-               <span>chicken</span>
-            </div>
-            <div class="content">
-               <div class="icon">
-                  <a href="#"> <i class="fas fa-calendar"></i> 21st may, 2022 </a>
-                  <a href="#"> <i class="fas fa-user"></i> by admin </a>
-               </div>
-               <a href="#" class="title">blog title goes here</a>
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, reprehenderit!</p>
-               <a href="#" class="btn">read more</a>
-            </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <div class="image">
-               <img src="images/blog-img-4.jpg" alt="">
-               <span>ice-cream</span>
-            </div>
-            <div class="content">
-               <div class="icon">
-                  <a href="#"> <i class="fas fa-calendar"></i> 21st may, 2022 </a>
-                  <a href="#"> <i class="fas fa-user"></i> by admin </a>
-               </div>
-               <a href="#" class="title">blog title goes here</a>
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, reprehenderit!</p>
-               <a href="#" class="btn">read more</a>
-            </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <div class="image">
-               <img src="images/blog-img-5.jpg" alt="">
-               <span>pizza</span>
-            </div>
-            <div class="content">
-               <div class="icon">
-                  <a href="#"> <i class="fas fa-calendar"></i> 21st may, 2022 </a>
-                  <a href="#"> <i class="fas fa-user"></i> by admin </a>
-               </div>
-               <a href="#" class="title">blog title goes here</a>
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, reprehenderit!</p>
-               <a href="#" class="btn">read more</a>
-            </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <div class="image">
-               <img src="images/blog-img-6.jpg" alt="">
-               <span>coffee</span>
-            </div>
-            <div class="content">
-               <div class="icon">
-                  <a href="#"> <i class="fas fa-calendar"></i> 21st may, 2022 </a>
-                  <a href="#"> <i class="fas fa-user"></i> by admin </a>
-               </div>
-               <a href="#" class="title">blog title goes here</a>
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, reprehenderit!</p>
-               <a href="#" class="btn">read more</a>
-            </div>
-         </div>
+         <?php } ?>
 
       </div>
 
@@ -766,21 +443,19 @@ while($orders = mysqli_fetch_assoc($orders_result)){
       <div class="icons">
          <i class="fas fa-phone"></i>
          <h3>phone</h3>
-         <p>+123-456-7890</p>
-         <p>+111-222-3333</p>
+         <p>+201122334455</p>
       </div>
 
       <div class="icons">
          <i class="fas fa-envelope"></i>
          <h3>email</h3>
-         <p>shaikhanas@gmail.com</p>
-         <p>anasbhai@gmail.com</p>
+         <p>example@email.com</p>
       </div>
 
       <div class="icons">
          <i class="fas fa-map"></i>
          <h3>address</h3>
-         <p>mumbai, india - 400104</p>
+         <p>assiut, egypt</p>
       </div>
 
    </div>
@@ -790,9 +465,15 @@ while($orders = mysqli_fetch_assoc($orders_result)){
       <a href="#" class="fab fa-twitter"></a>
       <a href="#" class="fab fa-instagram"></a>
       <a href="#" class="fab fa-linkedin"></a>
+      <!-- <div class="inputBox">
+         <span>our address</span>
+         <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d60307.59083109428!2d72.840725!3d19.141651!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63aceef0c69%3A0x2aa80cf2287dfa3b!2sJogeshwari%20West%2C%20Mumbai%2C%20Maharashtra%20400047!5e0!3m2!1sen!2sin!4v1642222128240!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+      </div> -->
    </div>
 
-   <div class="credit"> created by <span>mr. web designer</span> | all rights reserved! </div>
+   
+
+   <div class="credit"> created by <span>Fill here</span> | all rights reserved! </div>
 
 </section>
 
