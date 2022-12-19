@@ -17,15 +17,19 @@
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
-
 </head>
-<body>
-   
-<div class="heading">
-      <h3>Orders List</h3>
-   </div>
 
-   <div class="swiper menu-slider">
+<body>
+   <section class="menu" id="menu">
+      <div class="heading">
+         <a href="index.php" class="btn">
+            <i class="fas fa-back-arrow" color="white"></i>
+            Home
+         </a>
+         <h3>Orders List</h3>
+      </div>
+
+      <div class="swiper menu-slider">
          <div class="swiper-slide slide">
             <div class="box-container">
                <?php
@@ -40,22 +44,22 @@
                         <p><?php echo $orders['address'] ?></p>
                         <p><?php echo $orders['phone_number'] ?></p>
                      </div>
-                     <div>
+                     <h3>
                         <?php echo $orders['food_name'] ?>
                         <?php echo $orders['order_details'] ?>
-                     </div>
+                     </h3>
                      <div class="price"><?php echo $orders['quantity'] ?></div>
-                     <span>
-                        <a href='delete_order.php?id=<?php echo $orders['id'] ?>'>Delete order</a>
-                     </span>
+                     <h2>
+                        <a class="delete-order" href='delete_order.php?id=<?php echo $orders['id'] ?>'>Delete order</a>
+                     </h2>
                   </div>
                <?php } ?>
+            </div>
          </div>
-   </div>
-
+      </div>
+   </section>
 
 <!-- footer section starts  -->
-
 <section class="footer">
 
    <div class="icons-container">
@@ -104,14 +108,6 @@
 </section>
 
 <!-- footer section ends  -->
-
-
-
-
-
-
-
-
 
 
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
